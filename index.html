@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Controle de Presença</title>
+</head>
+<body>
+    <header>
+        <h1>Controle de Presença de Alunos</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Registrar Presença</h2>
+            <form id="attendance-form">
+                <label for="student-name">Nome do Aluno:</label>
+                <input type="text" id="student-name" required>
+
+                <label>Status:</label>
+                <label>
+                    <input type="radio" name="attendance-status" value="presente" required> Presente
+                </label>
+                <label>
+                    <input type="radio" name="attendance-status" value="ausente"> Ausente
+                </label>
+
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+        <section>
+            <h2>Lista de Presença</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome do Aluno</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-list">
+                    <!-- Registros de presença serão inseridos aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        const form = document.getElementById('attendance-form');
+        const attendanceList = document.getElementById('attendance-list');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const studentName = document.getElementById('student-name').value;
+            const attendanceStatus = document.querySelector('input[name="attendance-status"]:checked').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${studentName}</td><td>${attendanceStatus}</td>`;
+            attendanceList.appendChild(row);
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
